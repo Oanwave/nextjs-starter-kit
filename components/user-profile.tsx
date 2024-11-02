@@ -2,7 +2,7 @@ import {
     Avatar,
     AvatarFallback,
     AvatarImage,
-} from "@/components/ui/avatar"
+} from "/components/ui/avatar"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -12,8 +12,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuShortcut,
     DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
-import config from "@/config"
+} from "/components/ui/dropdown-menu"
+import config from "/config"
 import { SignOutButton, useUser } from "@clerk/nextjs"
 import {
     CreditCard,

@@ -1,7 +1,7 @@
 import { Computer, Network } from 'lucide-react'
 import { FaBusinessTime } from 'react-icons/fa'
 import { OrbitingCirclesComponent } from './orbiting-circles'
-import { TITLE_TAILWIND_CLASS } from '@/utils/constants'
+import { TITLE_TAILWIND_CLASS } from '/utils/constants'
 
 const features = [
   {

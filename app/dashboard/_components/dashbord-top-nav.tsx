@@ -1,12 +1,12 @@
 "use client"
 
-import ModeToggle from '@/components/mode-toggle'
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogClose } from '@/components/ui/dialog'
-import { Separator } from '@/components/ui/separator'
-import { SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { UserProfile } from '@/components/user-profile'
-import config from '@/config'
+import ModeToggle from '/components/mode-toggle'
+import { Button } from '/components/ui/button'
+import { Dialog, DialogClose } from '/components/ui/dialog'
+import { Separator } from '/components/ui/separator'
+import { SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '/components/ui/sheet'
+import { UserProfile } from '/components/user-profile'
+import config from '/config'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { Banknote, Folder, HomeIcon, Settings } from 'lucide-react'
 import Link from 'next/link'
@@ -51,6 +51,14 @@ export default function DashboardTopNav({ children }: { children: ReactNode }) {
                   <Button variant="outline" className="w-full">
                     <Banknote className="mr-2 h-4 w-4" />
                     Finance
+                  </Button>
+                </Link>
+              </DialogClose>
+              <DialogClose asChild>
+                <Link href="/dashboard/resume">
+                  <Button variant="outline" className="w-full">
+                    <Banknote className="mr-2 h-4 w-4" />
+                    Resume
                   </Button>
                 </Link>
               </DialogClose>

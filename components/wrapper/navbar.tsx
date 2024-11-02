@@ -7,9 +7,9 @@ import { SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet
 import { UserProfile } from "../user-profile";
 import ModeToggle from "../mode-toggle";
 import { BlocksIcon } from "lucide-react";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
-import config from "@/config";
-import { cn } from "@/lib/utils";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "/components/ui/navigation-menu";
+import config from "/config";
+import { cn } from "/lib/utils";
 import { useAuth } from "@clerk/nextjs";
 import { Dialog, DialogClose } from "@radix-ui/react-dialog";
 

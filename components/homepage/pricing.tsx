@@ -1,20 +1,21 @@
 "use client"
 
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsList, TabsTrigger } from "/components/ui/tabs"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "/components/ui/card"
 import { CheckCircle2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button } from "/components/ui/button"
 import React, { useEffect, useState } from "react"
-import { cn } from "@/lib/utils"
+import { cn } from "/lib/utils"
 import { useUser } from "@clerk/nextjs"
 import axios from "axios"
-import { loadStripe } from "@stripe/stripe-js"
+import { loadStripe } from '@stripe/stripe-js'; // Importing loadStripe
+
 import { toast } from "sonner"
-import { TITLE_TAILWIND_CLASS } from "@/utils/constants"
+import { TITLE_TAILWIND_CLASS } from "/utils/constants"
 import { useRouter } from "next/navigation"
 
 type PricingSwitchProps = {
-  onSwitch: (value: string) => void
+  onSwitch: (value: string) => void     
 }
 
 type PricingCardProps = {

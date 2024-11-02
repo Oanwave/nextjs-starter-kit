@@ -71,3 +71,15 @@ model invoices {
   email           String
   user_id         String?
 }
+
+model resume {
+  id           String   @id @default(uuid())
+  created_time DateTime @default(now())
+  title        String
+  description  String?
+  data         Json
+  user_id      String
+  last_updated DateTime @default(now())
+
+  @@index([user_id])
+}

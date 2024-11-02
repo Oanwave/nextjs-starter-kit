@@ -3,8 +3,8 @@ import {
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from "@/components/ui/accordion"
-import { TITLE_TAILWIND_CLASS } from "@/utils/constants"
+} from "/components/ui/accordion"
+import { TITLE_TAILWIND_CLASS } from "/utils/constants"
 
 export function AccordionComponent() {
     return (

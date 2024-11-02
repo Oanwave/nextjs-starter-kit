@@ -1,7 +1,7 @@
 "use client"
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import config from '@/config';
+import { Input } from '/components/ui/input'
+import { Label } from '/components/ui/label'
+import config from '/config';
 import { useUser } from '@clerk/nextjs'
 
 export default function Settings() {

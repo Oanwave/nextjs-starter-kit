@@ -1,4 +1,4 @@
-import OrbitingCircles from "@/components/magicui/orbiting-circles";
+import OrbitingCircles from "/components/magicui/orbiting-circles";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 import Image from "next/image";
 

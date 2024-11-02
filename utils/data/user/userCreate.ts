@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
-import { userCreateProps } from "@/utils/types";
+import { userCreateProps } from "/utils/types";
 
 export const userCreate = async ({
   email,

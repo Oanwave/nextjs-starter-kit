@@ -68,6 +68,12 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Adding new resume colors
+        'resume-primary': 'var(--resume-primary)',
+        'resume-secondary': 'var(--resume-secondary)',
+        'resume-accent': 'var(--resume-accent)',
+        'resume-background': 'var(--resume-background)',
+        'resume-text': 'var(--resume-text)',
       },
       borderRadius: {
         lg: "var(--radius)",

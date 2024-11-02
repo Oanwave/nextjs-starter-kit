@@ -1,5 +1,5 @@
 "server only";
-import { userUpdateProps } from "@/utils/types";
+import { userUpdateProps } from "/utils/types";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
