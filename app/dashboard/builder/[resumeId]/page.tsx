@@ -11,6 +11,7 @@ import { getResume } from "/utils/data/resume/getResume";
 import { updateResume } from "/utils/data/resume/updateResume";
 import Slider from "/components/ui/slider"
 import { Label } from "/components/ui/label"
+import { Upload, Plus, Trash2 } from 'lucide-react';
 
 interface ResumeData {
   basics: {
@@ -135,6 +136,159 @@ const initialResumeData: ResumeData = {
   volunteer: [{ organization: '', position: '', startDate: '', endDate: '', summary: '' }]
 };
 
+const ProfilesSection = ({ profiles, onChange }: {
+  profiles: any[],
+  onChange: (profiles: any[]) => void
+}) => {
+  const addProfile = () => {
+    onChange([...profiles, { network: '', url: '', username: '' }]);
+  };
+
+  const removeProfile = (index: number) => {
+    const newProfiles = profiles.filter((_, i) => i !== index);
+    onChange(newProfiles);
+  };
+
+  const updateProfile = (index: number, field: string, value: string) => {
+    const newProfiles = [...profiles];
+    newProfiles[index] = { ...newProfiles[index], [field]: value };
+    onChange(newProfiles);
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-medium">Profiles</h3>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={addProfile}
+          className="flex items-center gap-2"
+        >
+          <Plus size={16} />
+          Add Profile
+        </Button>
+      </div>
+
+      {profiles.map((profile, index) => (
+        <div key={index} className="flex gap-4 items-start">
+          <select
+            value={profile.network}
+            onChange={(e) => updateProfile(index, 'network', e.target.value)}
+            className="p-2 border rounded"
+          >
+            <option value="">Select Network</option>
+            <option value="Github">GitHub</option>
+            <option value="Linkedin">LinkedIn</option>
+            <option value="Twitter">Twitter</option>
+            <option value="Portfolio">Portfolio</option>
+          </select>
+
+          <Input
+            placeholder="Profile URL"
+            value={profile.url}
+            onChange={(e) => updateProfile(index, 'url', e.target.value)}
+          />
+
+          <Input
+            placeholder="Username"
+            value={profile.username}
+            onChange={(e) => updateProfile(index, 'username', e.target.value)}
+          />
+
+          <Button
+            type="button"
+            variant="destructive"
+            size="icon"
+            onClick={() => removeProfile(index)}
+          >
+            <Trash2 size={16} />
+          </Button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const ImageUpload = ({ value, onChange }: { 
+  value: string, 
+  onChange: (value: string) => void 
+}) => {
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setUploading(true);
+      setError('');
+      
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (!response.ok) {
+        throw new Error('Upload failed');
+      }
+
+      const data = await response.json();
+      
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      onChange(data.url);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      setError('Failed to upload image. Please try again.');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-2">
+      <Label>Profile Image</Label>
+      <div className="flex items-center gap-4">
+        {value && (
+          <img 
+            src={value} 
+            alt="Profile" 
+            className="w-20 h-20 rounded-full object-cover"
+          />
+        )}
+        <div className="space-y-2">
+          <Label 
+            htmlFor="image-upload" 
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2 border rounded-md hover:bg-gray-50 ${
+              uploading ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
+            <Upload size={16} />
+            {uploading ? 'Uploading...' : 'Upload Image'}
+          </Label>
+          <Input
+            id="image-upload"
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleImageUpload}
+            disabled={uploading}
+          />
+          {error && <p className="text-sm text-red-500">{error}</p>}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ResumeBuilder = () => {
   const { resumeId } = useParams();
   const { user } = useUser();
@@ -215,6 +369,27 @@ const ResumeBuilder = () => {
     }
   };
 
+  const handleProfileChange = (network: string, url: string) => {
+    setResumeData(prev => {
+      const profiles = [...prev.basics.profiles];
+      const index = profiles.findIndex(p => p.network === network);
+      
+      if (index >= 0) {
+        profiles[index] = { ...profiles[index], url };
+      } else {
+        profiles.push({ network, url, username: '' });
+      }
+
+      return {
+        ...prev,
+        basics: {
+          ...prev.basics,
+          profiles
+        }
+      };
+    });
+  };
+
   const renderForm = () => {
     switch (activeSection) {
             case 'basics':
@@ -267,6 +442,17 @@ const ResumeBuilder = () => {
               onChange={(e) => handleInputChange('basics', 'summary', e.target.value)}
             />
 
+            <div className="space-y-6">
+              <ImageUpload
+                value={resumeData.basics.image}
+                onChange={(url) => handleInputChange('basics', 'image', url)}
+              />
+              
+              <ProfilesSection
+                profiles={resumeData.basics.profiles}
+                onChange={(profiles) => handleInputChange('basics', 'profiles', profiles)}
+              />
+            </div>
           </div>
         )
       case 'work':

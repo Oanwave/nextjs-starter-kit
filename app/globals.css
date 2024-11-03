@@ -76,3 +76,43 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  
+  html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Add these base styles */
+/* .resume-page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  margin: 10mm auto;
+  background: white;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+} */
+
+/* @media screen {
+  body {
+    background: #f0f0f0;
+  }
+} */
