@@ -7,6 +7,7 @@ import { Button } from "/components/ui/button";
 import { Input } from "/components/ui/input";
 import { Textarea } from "/components/ui/textarea";
 import Gengar from 'app/components/templates/Gengar';
+import Modern from 'app/components/templates/Modern';
 import { getResume } from "/utils/data/resume/getResume";
 import { updateResume } from "/utils/data/resume/updateResume";
 import Slider from "/components/ui/slider"
@@ -39,6 +40,7 @@ interface ResumeData {
     name: string;
     position: string;
     url: string;
+    location: string
     startDate: string;
     endDate: string;
     summary: string;
@@ -47,6 +49,7 @@ interface ResumeData {
   education: Array<{
     institution: string;
     url: string;
+    location: string
     area: string;
     studyType: string;
     startDate: string;
@@ -123,8 +126,8 @@ const initialResumeData: ResumeData = {
     },
     profiles: [{ network: '', username: '', url: '' }],
   },
-  work: [{ name: '', position: '', url: '', startDate: '', endDate: '', summary: '', highlights: [''] }],
-  education: [{ institution: '', url: '', area: '', studyType: '', startDate: '', endDate: '', score: '', courses: [''] }],
+  work: [{ name: '', position: '', url: '', location: '', startDate: '', endDate: '', summary: '', highlights: [''] }],
+  education: [{ institution: '', url: '', location: '', area: '', studyType: '', startDate: '', endDate: '', score: '', courses: [''] }],
   skills: [{ name: '', level: '', keywords: [''] }],
   awards: [{ title: '', date: '', awarder: '', summary: '' }],
   certifications: [{ name: '', date: '', issuer: '', level: 0 }],
@@ -472,6 +475,19 @@ const ResumeBuilder = () => {
                   value={job.position}
                   onChange={(e) => handleInputChange('work', 'position', e.target.value, index)}
                 />
+                 <Input
+                  name="location"
+                  placeholder="Location"
+                  value={job.location}
+                  onChange={(e) => handleInputChange('work', 'location', e.target.value, index)}
+                />
+                <Input
+            name="url"
+            placeholder="Company Website URL"
+            type="url"
+            value={job.url}
+            onChange={(e) => handleInputChange('work', 'url', e.target.value, index)}
+          />
                 <Input
                   name="startDate"
                   type="date"
@@ -520,6 +536,12 @@ const ResumeBuilder = () => {
                   placeholder="Area of Study"
                   value={edu.area}
                   onChange={(e) => handleInputChange('education', 'area', e.target.value, index)}
+                />
+                <Input
+                  name="location"
+                  placeholder="Location"
+                  value={edu.location}
+                  onChange={(e) => handleInputChange('education', 'location', e.target.value, index)}
                 />
                 <Input
                   name="studyType"
@@ -904,7 +926,8 @@ const ResumeBuilder = () => {
       {/* Preview Section */}
       <div className="w-full md:w-full p-6 overflow-y-auto">
         <div className="max-w-screen-lg mx-auto border border-gray-200 p-8 shadow-lg">
-          <Gengar resumeData={resumeData} />
+          {/* <Gengar resumeData={resumeData} /> */}
+          <Modern resumeData={resumeData} />
         </div>
       </div>
     </div>

@@ -24,6 +24,7 @@ interface ResumeData {
       name: string;
       position: string;
       url: string;
+      location: string;
       startDate: string;
       endDate: string;
       summary: string;
@@ -32,6 +33,7 @@ interface ResumeData {
     education: Array<{
       institution: string;
       url: string;
+      location: string;
       area: string;
       studyType: string;
       startDate: string;
